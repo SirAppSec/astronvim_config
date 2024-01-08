@@ -2,6 +2,12 @@
 
 A user configuration template for [AstroNvim](https://github.com/AstroNvim/AstroNvim)
 
+# Quick install
+```
+
+git clone https://github.com/SirAppSec/astronvim_config ~/.config/nvim/lua/user
+nvim --headless -c 'quitall'
+```
 ## 🛠️ Installation
 
 #### Make a backup of your current nvim and shared folder
