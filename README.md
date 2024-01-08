@@ -7,6 +7,7 @@ A user configuration template for [AstroNvim](https://github.com/AstroNvim/Astro
 
 git clone https://github.com/SirAppSec/astronvim_config ~/.config/nvim/lua/user
 nvim --headless -c 'quitall'
+git remote set-url origin https://{token}@github.com/sirappsec/astronvim_config
 ```
 ## 🛠️ Installation
 
