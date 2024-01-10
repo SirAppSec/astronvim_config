@@ -8,6 +8,7 @@ return {
       -- add more things to the ensure_installed table protecting against community packs modifying it
       opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
         "lua_ls",
+        "pyright",
       })
     end,
   },
@@ -19,6 +20,8 @@ return {
       -- add more things to the ensure_installed table protecting against community packs modifying it
       opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
         "prettier",
+        "black",
+        "isort",
         "stylua",
       })
     end,
@@ -31,6 +34,16 @@ return {
       opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
         "python",
       })
+    end,
+  },
+  {
+    "mfussenegger/nvim-dap-python",
+    dependencies = "mfussenegger/nvim-dap",
+    ft = "python", -- NOTE: ft: lazy-load on filetype
+    config = function(_, opts)
+      -- local path = require("mason-registry").get_package("debugpy"):get_install_path() .. "/venv/bin/python"
+      local path = ".venv/bin/python" --NOTE Setup an interpreter path for a generalized python .venv - Locally
+      require("dap-python").setup(path, opts)
     end,
   },
 }
