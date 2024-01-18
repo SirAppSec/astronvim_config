@@ -7,7 +7,9 @@ return {
     spell = false, -- sets vim.opt.spell
     signcolumn = "auto", -- sets vim.opt.signcolumn to auto
     wrap = false, -- sets vim.opt.wrap
+    -- swapfile = false, -- Disable swap file, to delete all swap use: rm -rf ~/.local/state/nvim/swap/*
   },
+
   g = {
     mapleader = " ", -- sets vim.g.mapleader
     autoformat_enabled = true, -- enable or disable auto formatting at start (lsp.formatting.format_on_save must be enabled)
@@ -19,7 +21,7 @@ return {
     resession_enabled = false, -- enable experimental resession.nvim session management (will be default in AstroNvim v4)
   },
 }
--- If you need more control, you can use the function()...end notation
+-- If you need more control, you can use the function()...end notationk
 -- return function(local_vim)
 --   local_vim.opt.relativenumber = true
 --   local_vim.g.mapleader = " "
