@@ -30,10 +30,14 @@ return {
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
-    ["<leader>a"] = {"<cmd>echo 'SirAppSec'<cr>",desc = "Trying out the command echo"},
-    
+    ["<leader>a"] = { "<cmd>echo 'SirAppSec'<cr>", desc = "Trying out the command echo" },
+    -- used to allow tmux pane movement and also register the movement inside neovim
+    -- ["<C-h>"] = { ":bprev<cr>", desc = "Switch to Previous Buffer" },
+    -- ["<C-j>"] = { ":bnext<cr>", desc = "Switch to Next Buffer" },
+    -- ["<C-k>"] = { ":bprev<cr>", desc = "Switch to Previous Buffer" },
+    -- ["<C-l>"] = { ":bnext<cr>", desc = "Switch to Next Buffer" },
     -- a quick save
-    -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+    ["<C-s>"] = { ":w!<cr>", desc = "Save File" }, -- change description but the same command
   },
   t = {
     -- setting a mapping to false will disable it
