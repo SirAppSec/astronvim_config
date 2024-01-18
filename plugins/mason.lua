@@ -21,8 +21,11 @@ return {
       opts.ensure_installed = require("astronvim.utils").list_insert_unique(opts.ensure_installed, {
         "prettier",
         "black",
+        "pydantic",
         "isort",
         "stylua",
+        "mypy",
+        "pyright",
       })
     end,
   },
@@ -41,9 +44,10 @@ return {
     dependencies = "mfussenegger/nvim-dap",
     ft = "python", -- NOTE: ft: lazy-load on filetype
     config = function(_, opts)
-      -- local path = require("mason-registry").get_package("debugpy"):get_install_path() .. "/venv/bin/python"
+      -- local path = require("mason-registry").get_package("debugpy"):get_install_path() .. "/.venv/bin/python"
       local path = ".venv/bin/python" --NOTE Setup an interpreter path for a generalized python .venv - Locally
       require("dap-python").setup(path, opts)
+      -- require("dap.ext.vscode").load_launchjs(nil, {}) -- This Setting Throws off the lua config
     end,
   },
 }
