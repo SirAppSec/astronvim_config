@@ -69,17 +69,39 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
-    -- Set up custom filetypes
-    -- vim.filetype.add {
-    --   extension = {
-    --     foo = "fooscript",
-    --   },
-    --   filename = {
-    --     ["Foofile"] = "fooscript",
-    --   },
-    --   pattern = {
-    --     ["~/%.config/foo/.*"] = "fooscript",
-    --   },
-    -- }
+    function _G.Base64ToggleLine()
+      -- Force visual mode reselection to update '< and '> marks
+      -- Used to toggle the line to and from base 64 with VisualSelection ofLine only (<c-V>)
+      vim.cmd "normal! gv"
+
+      -- Capture the currently selected line
+      local line_num = vim.fn.getpos("'<")[2]
+      local line = vim.api.nvim_buf_get_lines(0, line_num - 1, line_num, false)[1]
+
+      -- Determine if we should encode or decode
+      local result
+      local is_base64 = (#line % 4 == 0) and line:match "^[A-Za-z0-9+/]+=?=?$"
+
+      if is_base64 then
+        -- Attempt to decode the line
+        local status, decoded = pcall(
+          function() return vim.fn.system("echo '" .. line:gsub("'", "'\\''") .. "' | base64 --decode") end
+        )
+        result = (status and decoded and #decoded > 0 and not decoded:match "%c") and decoded or line
+      else
+        -- Encode the line
+        result = vim.fn.system("printf '%s' " .. vim.fn.shellescape(line) .. " | base64")
+      end
+
+      -- Trim the newline character from the system call result
+      result = result:gsub("%s+$", "")
+
+      -- Replace the selected line with the result
+      vim.api.nvim_buf_set_lines(0, line_num - 1, line_num, false, { result })
+    end
+
+    -- Key mapping for line-wise visual mode<cmd>
+    -- <cmd> was originally used, using :<c-u> it now registers the selection correctly.
+    vim.api.nvim_set_keymap("x", "g?", ":<c-u>lua Base64ToggleLine()<CR>", { noremap = true, silent = true })
   end,
 }
