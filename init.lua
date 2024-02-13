@@ -69,9 +69,15 @@ return {
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
   polish = function()
+    -- exatra configuratino
+    --
+    --
+
+    -- don't use swap
+    vim.opt.swapfile = false
     function _G.Base64ToggleLine()
       -- Force visual mode reselection to update '< and '> marks
-      -- Used to toggle the line to and from base 64 with VisualSelection ofLine only (<c-V>)
+      -- Used to toggle the line to and from base 64 with VisualSelection ofLine only
       vim.cmd "normal! gv"
 
       -- Capture the currently selected line
